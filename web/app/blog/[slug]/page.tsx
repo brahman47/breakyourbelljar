@@ -27,6 +27,10 @@ interface Post {
   body: any;
 }
 
+// Disable static generation for blog posts to ensure fresh content
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function generateStaticParams() {
   const posts: Post[] = await client.fetch(postsQuery);
   return posts.map((post) => ({

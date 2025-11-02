@@ -20,6 +20,10 @@ interface Post {
   excerpt?: string;
 }
 
+// Disable static generation for homepage to ensure fresh content
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export default async function Home() {
   const posts: Post[] = await client.fetch(postsQuery);
   const featuredPost: Post | null = await client.fetch(featuredPostQuery);
