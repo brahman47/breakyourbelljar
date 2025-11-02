@@ -11,6 +11,13 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'featured',
+      title: 'Featured Post',
+      type: 'boolean',
+      description: 'Toggle this to show this post in the featured section on the homepage',
+      initialValue: false,
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
@@ -31,6 +38,48 @@ export default defineType({
       type: 'image',
       options: {
         hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          description: 'Important for SEO and accessibility',
+        },
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+        },
+      ],
+    }),
+    defineField({
+      name: 'gallery',
+      title: 'Image Gallery',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative text',
+              description: 'Important for SEO and accessibility',
+            },
+            {
+              name: 'caption',
+              type: 'string',
+              title: 'Caption',
+            },
+          ],
+        },
+      ],
+      options: {
+        layout: 'grid',
       },
     }),
     defineField({
