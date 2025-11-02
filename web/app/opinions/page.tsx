@@ -17,6 +17,11 @@ interface Post {
   excerpt?: string;
 }
 
+interface Category {
+  title: string;
+  description?: string;
+}
+
 const opinionsQuery = `*[_type == "post" && "opinions" in categories[]->slug.current] | order(publishedAt desc) {
   _id,
   title,
@@ -35,8 +40,14 @@ const opinionsQuery = `*[_type == "post" && "opinions" in categories[]->slug.cur
   "excerpt": array::join(string::split((pt::text(body)), "")[0..200], "") + "..."
 }`;
 
+const categoryQuery = `*[_type == "category" && slug.current == "opinions"][0] {
+  title,
+  description
+}`;
+
 export default async function OpinionsPage() {
   const posts: Post[] = await client.fetch(opinionsQuery);
+  const category: Category = await client.fetch(categoryQuery);
 
   return (
     <div className="min-h-screen bg-white">
@@ -63,11 +74,13 @@ export default async function OpinionsPage() {
       <header className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 text-center">
           <h1 className="text-6xl sm:text-7xl font-light text-gray-900 mb-4">
-            Opinions
+            {category?.title || "Opinions"}
           </h1>
-          <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">
-            Thoughtful perspectives on the world around us
-          </p>
+          {category?.description && (
+            <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">
+              {category.description}
+            </p>
+          )}
         </div>
       </header>
 

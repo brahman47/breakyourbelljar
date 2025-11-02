@@ -17,6 +17,11 @@ interface Post {
   excerpt?: string;
 }
 
+interface Category {
+  title: string;
+  description?: string;
+}
+
 const reflectionsQuery = `*[_type == "post" && "reflections" in categories[]->slug.current] | order(publishedAt desc) {
   _id,
   title,
@@ -35,8 +40,14 @@ const reflectionsQuery = `*[_type == "post" && "reflections" in categories[]->sl
   "excerpt": array::join(string::split((pt::text(body)), "")[0..200], "") + "..."
 }`;
 
+const categoryQuery = `*[_type == "category" && slug.current == "reflections"][0] {
+  title,
+  description
+}`;
+
 export default async function ReflectionsPage() {
   const posts: Post[] = await client.fetch(reflectionsQuery);
+  const category: Category = await client.fetch(categoryQuery);
 
   return (
     <div className="min-h-screen bg-white">
@@ -63,11 +74,13 @@ export default async function ReflectionsPage() {
       <header className="relative overflow-hidden bg-gradient-to-br from-amber-50 to-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-20 text-center">
           <h1 className="text-6xl sm:text-7xl font-light text-gray-900 mb-4">
-            Reflections
+            {category?.title || "Reflections"}
           </h1>
-          <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">
-            Quiet moments of introspection and contemplation
-          </p>
+          {category?.description && (
+            <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto">
+              {category.description}
+            </p>
+          )}
         </div>
       </header>
 
