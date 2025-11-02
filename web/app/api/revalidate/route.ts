@@ -1,4 +1,4 @@
-import { revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 import { type NextRequest, NextResponse } from 'next/server'
 import { parseBody } from 'next-sanity/webhook'
 
@@ -22,9 +22,9 @@ export async function POST(req: NextRequest) {
 
     console.log('Webhook received:', { type: body._type, slug: body.slug?.current })
 
-    // Revalidate using cache tags for efficient invalidation
-    revalidateTag('post')
-    console.log('Revalidated cache tag: post')
+    // Revalidate all pages - this will revalidate both homepage and all blog posts
+    revalidatePath('/', 'layout')
+    console.log('Revalidated all pages')
 
     return NextResponse.json({
       status: 200,
