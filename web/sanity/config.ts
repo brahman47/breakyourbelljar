@@ -9,7 +9,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // Set to true for better performance with Next.js caching
+  useCdn: false, // Set to false to get fresh data and reflect deletions immediately
 })
 
 // Sanity-recommended fetch helper with proper caching
