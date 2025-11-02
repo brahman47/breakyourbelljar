@@ -1,4 +1,4 @@
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidatePath } from 'next/cache'
 import { type NextRequest, NextResponse } from 'next/server'
 import { parseBody } from 'next-sanity/webhook'
 
@@ -11,28 +11,37 @@ export async function POST(req: NextRequest) {
 
     // Validate the webhook signature
     if (!isValidSignature) {
+      console.error('Invalid webhook signature')
       return new Response('Invalid signature', { status: 401 })
     }
 
     if (!body?._type) {
+      console.error('Missing _type in webhook body')
       return new Response('Bad Request', { status: 400 })
     }
 
-    // Revalidate the homepage for any post changes
-    revalidatePath('/')
+    console.log('Webhook received:', { type: body._type, slug: body.slug?.current })
+
+    // Always revalidate the homepage for any post changes (create, update, delete)
+    revalidatePath('/', 'page')
     
     // If it's a post with a slug, revalidate that specific page too
     if (body._type === 'post' && body.slug?.current) {
-      revalidatePath(`/blog/${body.slug.current}`)
+      revalidatePath(`/blog/${body.slug.current}`, 'page')
     }
+
+    // Also revalidate the category pages
+    revalidatePath('/reflections', 'page')
+    revalidatePath('/opinions', 'page')
 
     return NextResponse.json({
       status: 200,
       revalidated: true,
       now: Date.now(),
+      body: body,
     })
   } catch (err: any) {
-    console.error(err)
+    console.error('Webhook error:', err)
     return new Response(err.message, { status: 500 })
   }
 }
