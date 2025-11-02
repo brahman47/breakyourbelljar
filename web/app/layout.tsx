@@ -18,6 +18,9 @@ const cormorant = Cormorant({
 export const metadata: Metadata = {
   title: "Break Your Bell Jar",
   description: "A space for stories, reflections, and moments of clarity",
+  icons: {
+    icon: '/bybj.png',
+  },
 };
 
 export default function RootLayout({

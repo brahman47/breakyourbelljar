@@ -34,8 +34,9 @@ export default async function Home() {
       <nav className="border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6">
           <div className="flex items-center justify-between">
-            <Link href="/" className="text-xl font-light text-gray-900">
-              Break Your <span className="font-serif italic">Bell Jar</span>
+            <Link href="/" className="flex items-center gap-3 text-xl font-light text-gray-900">
+              <Image src="/bybj.png" alt="BYBJ Logo" width={32} height={32} className="rounded-md" />
+              <span>Break Your <span className="font-serif italic">Bell Jar</span></span>
             </Link>
             <div className="flex items-center gap-8">
               <Link href="/reflections" className="text-gray-600 hover:text-amber-600 transition-colors font-light">
