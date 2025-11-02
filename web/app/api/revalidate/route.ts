@@ -1,4 +1,4 @@
-import { revalidatePath } from 'next/cache'
+import { revalidateTag } from 'next/cache'
 import { type NextRequest, NextResponse } from 'next/server'
 import { parseBody } from 'next-sanity/webhook'
 
@@ -22,17 +22,9 @@ export async function POST(req: NextRequest) {
 
     console.log('Webhook received:', { type: body._type, slug: body.slug?.current })
 
-    // Always revalidate the homepage for any post changes (create, update, delete)
-    revalidatePath('/', 'page')
-    
-    // If it's a post with a slug, revalidate that specific page too
-    if (body._type === 'post' && body.slug?.current) {
-      revalidatePath(`/blog/${body.slug.current}`, 'page')
-    }
-
-    // Also revalidate the category pages
-    revalidatePath('/reflections', 'page')
-    revalidatePath('/opinions', 'page')
+    // Revalidate using cache tags for efficient invalidation
+    revalidateTag('post')
+    console.log('Revalidated cache tag: post')
 
     return NextResponse.json({
       status: 200,

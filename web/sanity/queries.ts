@@ -1,4 +1,6 @@
-export const postsQuery = `*[_type == "post"] | order(publishedAt desc) {
+import { defineQuery } from 'next-sanity'
+
+export const postsQuery = defineQuery(`*[_type == "post"] | order(publishedAt desc) {
   _id,
   title,
   slug,
@@ -20,9 +22,9 @@ export const postsQuery = `*[_type == "post"] | order(publishedAt desc) {
     title
   },
   "excerpt": array::join(string::split((pt::text(body)), "")[0..200], "") + "..."
-}`
+}`)
 
-export const featuredPostQuery = `*[_type == "post" && featured == true] | order(publishedAt desc)[0] {
+export const featuredPostQuery = defineQuery(`*[_type == "post" && featured == true] | order(publishedAt desc)[0] {
   _id,
   title,
   slug,
@@ -43,9 +45,9 @@ export const featuredPostQuery = `*[_type == "post" && featured == true] | order
     title
   },
   "excerpt": array::join(string::split((pt::text(body)), "")[0..200], "") + "..."
-}`
+}`)
 
-export const postQuery = `*[_type == "post" && slug.current == $slug][0] {
+export const postQuery = defineQuery(`*[_type == "post" && slug.current == $slug][0] {
   _id,
   title,
   slug,
@@ -74,4 +76,4 @@ export const postQuery = `*[_type == "post" && slug.current == $slug][0] {
     title
   },
   body
-}`
+}`)

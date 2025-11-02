@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "@/sanity/config";
+import { sanityFetch } from "@/sanity/config";
 import { postsQuery, featuredPostQuery } from "@/sanity/queries";
 import Navigation from "@/components/Navigation";
 
@@ -21,8 +21,14 @@ interface Post {
 }
 
 export default async function Home() {
-  const posts: Post[] = await client.fetch(postsQuery);
-  const featuredPost: Post | null = await client.fetch(featuredPostQuery);
+  const posts = await sanityFetch<Post[]>({
+    query: postsQuery,
+    tags: ['post'],
+  });
+  const featuredPost = await sanityFetch<Post | null>({
+    query: featuredPostQuery,
+    tags: ['post'],
+  });
   
   // Filter out featured post from regular posts if it exists
   const regularPosts = featuredPost 

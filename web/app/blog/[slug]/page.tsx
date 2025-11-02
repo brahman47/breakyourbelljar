@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "@/sanity/config";
+import { sanityFetch } from "@/sanity/config";
 import { postQuery, postsQuery } from "@/sanity/queries";
 import { PortableText } from "@portabletext/react";
 import Navigation from "@/components/Navigation";
@@ -28,7 +28,10 @@ interface Post {
 }
 
 export async function generateStaticParams() {
-  const posts: Post[] = await client.fetch(postsQuery);
+  const posts = await sanityFetch<Post[]>({
+    query: postsQuery,
+    tags: ['post'],
+  });
   return posts.map((post) => ({
     slug: post.slug.current,
   }));
@@ -40,7 +43,11 @@ export default async function BlogPost({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post: Post = await client.fetch(postQuery, { slug });
+  const post = await sanityFetch<Post>({
+    query: postQuery,
+    params: { slug },
+    tags: ['post'],
+  });
 
   if (!post) {
     return <div>Post not found</div>;
