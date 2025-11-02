@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/sanity/config";
 import { postsQuery, featuredPostQuery } from "@/sanity/queries";
+import Navigation from "@/components/Navigation";
 
 interface Post {
   _id: string;
@@ -31,24 +32,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3 text-xl font-light text-gray-900">
-              <Image src="/bybj.png" alt="BYBJ Logo" width={32} height={32} className="rounded-md" />
-              <span>Break Your <span className="font-serif italic">Bell Jar</span></span>
-            </Link>
-            <div className="flex items-center gap-8">
-              <Link href="/reflections" className="text-gray-600 hover:text-amber-600 transition-colors font-light">
-                Reflections
-              </Link>
-              <Link href="/opinions" className="text-gray-600 hover:text-amber-600 transition-colors font-light">
-                Opinions
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Header */}
       <header className="relative overflow-hidden">
