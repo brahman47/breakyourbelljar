@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant } from "next/font/google";
+import { Roboto, Cormorant } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "700"],
+  variable: "--font-roboto",
 });
 
 const cormorant = Cormorant({
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${cormorant.variable} font-sans antialiased`}
+        className={`${roboto.variable} ${cormorant.variable} font-sans antialiased`}
       >
         {children}
       </body>

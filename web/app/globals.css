@@ -8,6 +8,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  
+  --font-sans: var(--font-roboto), system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), Georgia, serif;
 }
 
 body {
@@ -15,4 +18,17 @@ body {
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Only apply Roboto to prose content, not to elements with font-serif */
+.prose:not(.font-serif) {
+  font-family: var(--font-roboto), system-ui, sans-serif;
+}
+
+.prose p:not(.font-serif) {
+  font-family: var(--font-roboto), system-ui, sans-serif;
+}
+
+.prose h1:not(.font-serif), .prose h2:not(.font-serif), .prose h3:not(.font-serif), .prose h4:not(.font-serif), .prose h5:not(.font-serif), .prose h6:not(.font-serif) {
+  font-family: var(--font-roboto), system-ui, sans-serif;
 }

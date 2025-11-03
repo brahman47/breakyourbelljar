@@ -53,6 +53,21 @@ export default async function BlogPost({
     return <div>Post not found</div>;
   }
 
+  const portableTextComponents = {
+    block: {
+      normal: ({ children }: any) => <p className="mb-6">{children}</p>,
+    },
+    marks: {
+      strong: ({ children }: any) => <strong className="font-semibold">{children}</strong>,
+      em: ({ children }: any) => <em className="italic">{children}</em>,
+      link: ({ children, value }: any) => (
+        <a href={value.href} className="text-amber-600 hover:underline" target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      ),
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -108,8 +123,8 @@ export default async function BlogPost({
         )}
 
         {/* Body Content */}
-        <div className="prose prose-lg prose-stone max-w-none mb-20 prose-headings:font-light prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-amber-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl">
-          <PortableText value={post.body} />
+        <div className="prose prose-lg max-w-none mb-20 prose-headings:font-sans prose-headings:font-light prose-headings:text-gray-900 prose-p:font-sans prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-amber-600 prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl">
+          <PortableText value={post.body} components={portableTextComponents} />
         </div>
 
         {/* Image Gallery */}
@@ -143,8 +158,14 @@ export default async function BlogPost({
         )}
       </article>
 
-      {/* Footer spacer */}
-      <div className="h-32" />
+      {/* Footer */}
+      <footer className="border-t border-gray-100 mt-32">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 text-center">
+          <p className="text-sm text-gray-500 font-light">
+            © {new Date().getFullYear()} Break Your Bell Jar. A space to breathe and create.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
