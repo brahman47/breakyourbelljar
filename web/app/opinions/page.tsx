@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/sanity/config";
+import Navigation from "@/components/Navigation";
 
 interface Post {
   _id: string;
@@ -52,23 +53,7 @@ export default async function OpinionsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="text-xl font-light text-gray-900">
-              Break Your <span className="font-serif italic">Bell Jar</span>
-            </Link>
-            <div className="flex items-center gap-8">
-              <Link href="/reflections" className="text-gray-600 hover:text-amber-600 transition-colors font-light">
-                Reflections
-              </Link>
-              <Link href="/opinions" className="text-amber-600 font-light border-b-2 border-amber-600">
-                Opinions
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Header */}
       <header className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-white">
