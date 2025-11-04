@@ -26,6 +26,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(circle at 20% 20%, rgba(251, 191, 36, 0.12), transparent 45%),
+    radial-gradient(circle at 75% 15%, rgba(96, 165, 250, 0.18), transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(251, 191, 36, 0.12), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.65));
+}
+
+a {
+  transition: color 200ms ease, opacity 200ms ease;
+}
+
 /* Only apply Roboto to prose content, not to elements with font-serif */
 .prose:not(.font-serif) {
   font-family: var(--font-roboto), system-ui, sans-serif;
