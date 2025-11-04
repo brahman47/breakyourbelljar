@@ -42,24 +42,37 @@ const accents: Record<AccentKey, {
   orb: string;
   badge: string;
   hoverText: string;
+  cardTitle: string;
+  meta: string;
+  calendar: string;
 }> = {
   amber: {
-    heroGradient: 'from-amber-50 via-white to-white',
-    orb: 'bg-amber-200/45',
-    badge: 'bg-amber-100 text-amber-700/80',
-    hoverText: 'group-hover:text-amber-600',
+    heroGradient: 'from-[#f1e3d4] via-white to-white',
+    orb: 'bg-[#f1e3d4]/60',
+    badge: 'bg-[#f1e3d4] text-[#b8854d]',
+    hoverText: 'group-hover:text-[#c18a4e]',
+    cardTitle: 'text-[#57483c]',
+    meta: 'text-[#9a8c7d]',
+    calendar: 'text-[#c18a4e]',
   },
   sky: {
-    heroGradient: 'from-sky-50 via-white to-white',
-    orb: 'bg-sky-200/35',
-    badge: 'bg-sky-100 text-sky-700/80',
-    hoverText: 'group-hover:text-sky-600',
+    heroGradient: 'from-[#dde8f1] via-white to-white',
+    orb: 'bg-[#dde8f1]/55',
+    badge: 'bg-[#dde8f1] text-[#5f7c92]',
+    hoverText: 'group-hover:text-[#6a8ca4]',
+    cardTitle: 'text-[#4f6277]',
+    meta: 'text-[#6f8599]',
+    calendar: 'text-[#6a8ca4]',
   },
 };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
 };
 
 const listContainer = {
@@ -73,7 +86,11 @@ const listContainer = {
 
 const item = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
 };
 
 function formatDate(dateString?: string) {
@@ -115,14 +132,14 @@ export function CategoryPageContent({
         >
           <motion.h1
             variants={fadeUp}
-            className="font-serif text-5xl font-light text-gray-900 sm:text-6xl"
+            className="font-serif text-5xl font-light text-slate-600 sm:text-6xl"
           >
             {category?.title ?? 'Category'}
           </motion.h1>
           {category?.description && (
             <motion.p
               variants={fadeUp}
-              className="mt-6 text-lg leading-relaxed text-gray-600 sm:text-xl"
+              className="mt-6 text-lg leading-relaxed text-slate-500 sm:text-xl"
             >
               {category.description}
             </motion.p>
@@ -136,16 +153,16 @@ export function CategoryPageContent({
             initial="hidden"
             animate="visible"
             variants={fadeUp}
-            className="mx-auto max-w-lg rounded-3xl border border-dashed border-gray-200 bg-white/70 p-14 text-center shadow-xl backdrop-blur"
+            className="mx-auto max-w-lg rounded-3xl border border-dashed border-[#eadfd0] bg-[#fefbf7]/80 p-14 text-center shadow-xl backdrop-blur"
           >
-            <PenSquare className="mx-auto mb-6 h-12 w-12 text-amber-500" />
-            <h2 className="mb-4 text-2xl font-light text-gray-900">{emptyTitle}</h2>
-            <p className="mb-8 text-base text-gray-600">{emptyBody}</p>
+            <PenSquare className="mx-auto mb-6 h-12 w-12 text-[#c18a4e]" />
+            <h2 className="mb-4 text-2xl font-light text-slate-600">{emptyTitle}</h2>
+            <p className="mb-8 text-base text-slate-500">{emptyBody}</p>
             <a
               href={studioUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
+              className="inline-flex items-center gap-2 rounded-full border border-[#e6d4bf] bg-[#f1e3d4] px-6 py-3 text-sm font-medium text-[#6f5d4d] transition hover:bg-[#ead7c0]"
             >
               Open Studio
               <ArrowUpRight className="h-4 w-4" />
@@ -163,10 +180,11 @@ export function CategoryPageContent({
                 key={post._id}
                 variants={item}
                 transition={{ delay: index * 0.04 }}
-                className="group relative overflow-hidden rounded-3xl border border-gray-100 bg-white/60 p-5 shadow-[0_40px_120px_-80px_rgba(17,24,39,0.45)] backdrop-blur"
+                className="group relative overflow-hidden rounded-[2.5rem] border border-[#eadfd0] bg-[#fefbf7]/90 p-6 shadow-[0_44px_120px_-90px_rgba(110,93,77,0.4)] transition-transform duration-500 backdrop-blur hover:-translate-y-1"
               >
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/75 via-transparent to-[#f3e5d6]/55 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 {post.mainImage && (
-                  <div className="relative mb-6 aspect-[4/5] overflow-hidden rounded-2xl bg-gray-100">
+                  <div className="relative mb-6 aspect-[4/5] overflow-hidden rounded-[2rem] bg-[#f7f1ea]">
                     <Image
                       src={post.mainImage.asset.url}
                       alt={post.mainImage.alt || post.title}
@@ -177,23 +195,26 @@ export function CategoryPageContent({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-60" />
                   </div>
                 )}
-                <div className="flex h-full flex-col gap-4">
-                  <span className={cn('inline-flex w-fit items-center gap-2 rounded-full px-3 py-1 text-[0.65rem] uppercase tracking-[0.25em]', accentStyles.badge)}>
+                <div className="relative flex h-full flex-col gap-4">
+                  <div className="absolute inset-0 rounded-[2rem] bg-white/20 blur-[60px] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative flex h-full flex-col gap-4">
+                  <span className={cn('inline-flex w-fit items-center gap-2 rounded-full px-3 py-1 text-[0.68rem] uppercase tracking-[0.28em] font-serif', accentStyles.badge)}>
                     {category?.title ?? 'Collection'}
                   </span>
-                  <h3 className={cn('text-xl font-light text-gray-900 transition-colors', accentStyles.hoverText)}>
+                  <h3 className={cn('font-serif text-2xl font-light leading-snug transition-colors', accentStyles.cardTitle, accentStyles.hoverText)}>
                     {post.title}
                   </h3>
                   {post.excerpt && (
-                    <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">{post.excerpt}</p>
+                    <p className="line-clamp-3 text-sm leading-relaxed text-[#6f5d4d]/80">{post.excerpt}</p>
                   )}
-                  <div className="mt-auto flex items-center justify-between text-sm text-gray-500">
+                  <div className={cn('mt-auto flex items-center justify-between text-sm', accentStyles.meta)}>
                     <span className="inline-flex items-center gap-2">
-                      <CalendarDays className="h-4 w-4" />
+                      <CalendarDays className={cn('h-4 w-4', accentStyles.calendar)} />
                       {formatDate(post.publishedAt)}
                     </span>
-                    <ArrowUpRight className="h-4 w-4 text-amber-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <ArrowUpRight className="h-4 w-4 text-[#c18a4e] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   </div>
+                </div>
                 </div>
                 <Link href={`/blog/${post.slug.current}`} className="absolute inset-0">
                   <span className="sr-only">Read {post.title}</span>
@@ -205,13 +226,13 @@ export function CategoryPageContent({
       </main>
 
       <footer className="relative mt-20">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-gray-950 via-gray-900/95 to-transparent" />
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-16 text-center sm:px-8 lg:px-12">
-          <p className="text-base text-gray-300">
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-[#f1e3d4] via-[#f8f3ec] to-transparent" />
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-16 text-center text-slate-500 sm:px-8 lg:px-12">
+          <p className="text-base">
             © {new Date().getFullYear()} Break Your Bell Jar — {category?.title ?? 'Stories'} curated with care.
           </p>
-          <div className="mx-auto h-px w-24 bg-gradient-to-r from-transparent via-amber-500/80 to-transparent" />
-          <p className="text-sm text-gray-400">Write gently. Read deeply.</p>
+          <div className="mx-auto h-px w-24 bg-gradient-to-r from-transparent via-[#c18a4e]/70 to-transparent" />
+          <p className="text-sm text-slate-400">Write gently. Read deeply.</p>
         </div>
       </footer>
     </div>

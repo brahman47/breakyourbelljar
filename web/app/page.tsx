@@ -39,13 +39,13 @@ export default async function Home() {
       <Navigation />
       <HomeContent featuredPost={featuredPost} posts={regularPosts} />
       <footer className="relative mt-24">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-gray-950 via-gray-900/95 to-transparent" />
-        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-16 text-center sm:px-8 lg:px-12">
-          <p className="text-base text-gray-300">
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-[#f1e3d4] via-[#f8f3ec] to-transparent" />
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-16 text-center text-slate-500 sm:px-8 lg:px-12">
+          <p className="text-base">
             © {new Date().getFullYear()} Break Your Bell Jar — phrases stitched together for curious minds.
           </p>
-          <div className="mx-auto h-px w-24 bg-gradient-to-r from-transparent via-amber-500/80 to-transparent" />
-          <p className="text-sm text-gray-400">
+          <div className="mx-auto h-px w-24 bg-gradient-to-r from-transparent via-[#c18a4e]/70 to-transparent" />
+          <p className="text-sm text-slate-400">
             Crafted with intention. Refined with presence.
           </p>
         </div>

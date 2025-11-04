@@ -28,7 +28,7 @@ interface HomeContentProps {
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 const staggerContainer = {
@@ -46,7 +46,7 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' },
+    transition: { duration: 0.5 },
   },
 };
 
@@ -67,8 +67,8 @@ export function HomeContent({ featuredPost, posts }: HomeContentProps) {
   return (
     <div className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-32 right-[-10%] h-80 w-80 rounded-full bg-amber-200/40 blur-3xl" />
-        <div className="absolute -bottom-40 left-[-8%] h-96 w-96 rounded-full bg-sky-200/30 blur-3xl" />
+        <div className="absolute -top-32 right-[-10%] h-80 w-80 rounded-full bg-[#f1e3d4]/50 blur-3xl" />
+        <div className="absolute -bottom-40 left-[-8%] h-96 w-96 rounded-full bg-[#dde8f1]/45 blur-3xl" />
         <div className="absolute inset-x-0 top-1/3 h-96 bg-gradient-to-b from-white/30 via-white/60 to-white" />
       </div>
 
@@ -81,25 +81,25 @@ export function HomeContent({ featuredPost, posts }: HomeContentProps) {
         >
           <motion.span
             variants={fadeInUp}
-            className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-50/70 px-4 py-1 text-sm uppercase tracking-[0.3em] text-amber-700/80"
+            className="inline-flex items-center gap-2 rounded-full bg-[#f6f1eb]/80 px-5 py-2 text-sm font-serif italic tracking-[0.18em] text-slate-500"
           >
-            <Feather className="h-4 w-4" />
+            <Feather className="h-4 w-4 text-[#d8a46c]" />
             Gentle rebellion
           </motion.span>
 
           <motion.h1
             variants={fadeInUp}
-            className="font-serif text-5xl font-light tracking-tight text-gray-900 sm:text-6xl lg:text-7xl"
+            className="font-serif text-5xl font-light tracking-tight text-slate-600 sm:text-6xl lg:text-7xl"
           >
             Break Your
-            <span className="block text-amber-600">Bell Jar</span>
+            <span className="block text-[#d8a46c]">Bell Jar</span>
           </motion.h1>
 
           <motion.p
             variants={fadeInUp}
-            className="text-lg leading-relaxed text-gray-600 sm:text-xl"
+            className="text-lg leading-relaxed text-slate-500 sm:text-xl"
           >
-            A sanctuary for thoughtful reflections, unfiltered opinions, and the stories that shape us.
+            A sanctuary for thoughtful reflections, unfiltered opinions, and the stories that shape me.
           </motion.p>
 
           <motion.div
@@ -108,14 +108,14 @@ export function HomeContent({ featuredPost, posts }: HomeContentProps) {
           >
             <Link
               href="/reflections"
-              className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-3 text-sm font-light tracking-wide text-white transition hover:bg-gray-800"
+              className="inline-flex items-center gap-2 rounded-full border border-[#e6d4bf] bg-[#f1e3d4] px-6 py-3 text-sm font-light tracking-wide text-[#6f5d4d] transition hover:bg-[#ead7c0]"
             >
               Explore Reflections
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <Link
               href="/opinions"
-              className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-6 py-3 text-sm font-light tracking-wide text-gray-700 transition hover:border-amber-300 hover:text-amber-600"
+              className="inline-flex items-center gap-2 rounded-full border border-[#eadfd0] px-6 py-3 text-sm font-light tracking-wide text-slate-500 transition hover:border-[#d8a46c] hover:text-[#c18a4e]"
             >
               Visit Opinions
               <PenSquare className="h-4 w-4" />
@@ -130,12 +130,12 @@ export function HomeContent({ featuredPost, posts }: HomeContentProps) {
             <motion.article variants={cardVariants}>
               <Link
                 href={`/blog/${featuredPost.slug.current}`}
-                className="group relative grid gap-10 overflow-hidden rounded-[2.75rem] border border-gray-100 bg-white/70 p-10 shadow-[0_40px_120px_-60px_rgba(17,24,39,0.35)] backdrop-blur"
+                className="group relative grid gap-10 overflow-hidden rounded-[3rem] border border-[#eadfd0] bg-[#fffaf5]/95 p-12 shadow-[0_56px_150px_-80px_rgba(110,93,77,0.45)] transition-transform duration-500 backdrop-blur hover:-translate-y-1"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-50/90 via-transparent to-white/90 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white via-transparent to-[#f3e5d6]/65 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="relative grid gap-10 lg:grid-cols-2">
                   {featuredPost.mainImage && (
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-[2.4rem]">
                       <Image
                         src={featuredPost.mainImage.asset.url}
                         alt={featuredPost.mainImage.alt || featuredPost.title}
@@ -148,27 +148,35 @@ export function HomeContent({ featuredPost, posts }: HomeContentProps) {
                     </div>
                   )}
 
-                  <div className="flex flex-col justify-center gap-6">
-                    <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.25em] text-gray-500">
-                      <span className="rounded-full bg-amber-100 px-3 py-1 text-amber-700/80">Featured</span>
+                  <div className="relative flex flex-col justify-center gap-8">
+                    <div className="absolute inset-0 rounded-[2.6rem] bg-white/30 blur-[90px] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="relative flex flex-col justify-center gap-8">
+                    <div className="flex flex-wrap items-center gap-3 text-[0.68rem] uppercase tracking-[0.32em] text-[#ad9f8f]">
+                      <span className="inline-flex items-center gap-2 rounded-full bg-[#f1e3d4] px-3 py-1 font-serif text-[#b8854d]">Featured</span>
                       {featuredPost.categories?.[0]?.title && (
-                        <span className="text-gray-400">• {featuredPost.categories[0].title}</span>
+                        <span className="flex items-center gap-3">
+                          <span className="h-px w-6 bg-[#e2d6c8]" />
+                          {featuredPost.categories[0].title}
+                        </span>
                       )}
                     </div>
-                    <h2 className="text-balance font-serif text-4xl font-light text-gray-900 transition-colors group-hover:text-amber-600 sm:text-5xl">
+                    <h2 className="text-balance font-serif text-4xl font-light tracking-[0.02em] leading-[1.28] text-[#6c5a4c] transition-colors group-hover:text-[#c18a4e] sm:text-5xl">
                       {featuredPost.title}
                     </h2>
                     {featuredPost.excerpt && (
-                      <p className="text-lg leading-relaxed text-gray-600">{featuredPost.excerpt}</p>
+                      <p className="text-lg font-sans leading-[1.75] text-[#9a8f84]">
+                        {featuredPost.excerpt}
+                      </p>
                     )}
-                    <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
-                      {featuredPost.author?.name && <span>{featuredPost.author.name}</span>}
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-[#9a8c7d]">
+                      {featuredPost.author?.name && <span className="inline-flex items-center gap-2 font-light text-[#85776a]">{featuredPost.author.name}</span>}
                       {featuredPost.publishedAt && (
                         <span className="inline-flex items-center gap-2">
-                          <CalendarDays className="h-4 w-4" />
+                          <CalendarDays className="h-4 w-4 text-[#c18a4e]" />
                           {formatDate(featuredPost.publishedAt, true)}
                         </span>
                       )}
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -188,10 +196,11 @@ export function HomeContent({ featuredPost, posts }: HomeContentProps) {
                   key={post._id}
                   variants={cardVariants}
                   transition={{ delay: index * 0.05 }}
-                  className="group relative overflow-hidden rounded-3xl border border-gray-100 bg-white/60 p-5 shadow-[0_40px_120px_-80px_rgba(17,24,39,0.4)] backdrop-blur"
+                  className="group relative overflow-hidden rounded-[2.5rem] border border-[#eadfd0] bg-[#fefbf7]/90 p-6 shadow-[0_44px_120px_-90px_rgba(110,93,77,0.4)] transition-transform duration-500 backdrop-blur hover:-translate-y-1"
                 >
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/80 via-transparent to-[#f3e5d6]/55 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   {post.mainImage && (
-                    <div className="relative mb-6 aspect-[4/5] overflow-hidden rounded-2xl bg-gray-100">
+                    <div className="relative mb-6 aspect-[4/5] overflow-hidden rounded-[2rem] bg-[#f7f1ea]">
                       <Image
                         src={post.mainImage.asset.url}
                         alt={post.mainImage.alt || post.title}
@@ -202,26 +211,31 @@ export function HomeContent({ featuredPost, posts }: HomeContentProps) {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-60" />
                     </div>
                   )}
-                  <div className="flex h-full flex-col gap-4">
+                    <div className="relative flex h-full flex-col gap-4">
+                      <div className="absolute inset-0 rounded-[2rem] bg-white/20 blur-[60px] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                      <div className="relative flex h-full flex-col gap-4">
                     {post.categories?.[0]?.title && (
-                      <span className="text-xs uppercase tracking-[0.25em] text-gray-500">
+                      <span className="text-[0.7rem] uppercase tracking-[0.3em] text-[#b3a493]">
                         {post.categories[0].title}
                       </span>
                     )}
-                    <h3 className="text-xl font-light text-gray-900 transition-colors group-hover:text-amber-600">
+                    <h3 className="font-serif text-2xl font-light leading-snug text-[#57483c] transition-colors group-hover:text-[#c18a4e]">
                       {post.title}
                     </h3>
                     {post.excerpt && (
-                      <p className="line-clamp-3 text-sm leading-relaxed text-gray-600">{post.excerpt}</p>
+                      <p className="relative z-10 line-clamp-3 text-sm font-sans leading-relaxed text-[#8a7d72]">
+                        {post.excerpt}
+                      </p>
                     )}
-                    <div className="mt-auto flex items-center justify-between text-sm text-gray-500">
-                      <span className="inline-flex items-center gap-2">
-                        <CalendarDays className="h-4 w-4" />
-                        {formatDate(post.publishedAt)}
-                      </span>
-                      <ArrowUpRight className="h-4 w-4 text-amber-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <div className="mt-auto flex items-center justify-between text-sm text-[#9a8c7d]">
+                          <span className="inline-flex items-center gap-2">
+                            <CalendarDays className="h-4 w-4 text-[#c18a4e]" />
+                            {formatDate(post.publishedAt)}
+                          </span>
+                          <ArrowUpRight className="h-4 w-4 text-[#c18a4e] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        </div>
+                      </div>
                     </div>
-                  </div>
                   <Link href={`/blog/${post.slug.current}`} className="absolute inset-0">
                     <span className="sr-only">Read {post.title}</span>
                   </Link>
@@ -233,17 +247,17 @@ export function HomeContent({ featuredPost, posts }: HomeContentProps) {
           {posts.length === 0 && !featuredPost && (
             <motion.div
               variants={cardVariants}
-              className="mx-auto max-w-xl rounded-3xl border border-dashed border-gray-200 bg-white/70 p-14 text-center shadow-xl backdrop-blur"
+              className="mx-auto max-w-xl rounded-3xl border border-dashed border-[#eadfd0] bg-[#fefbf7]/80 p-14 text-center shadow-xl backdrop-blur"
             >
-              <PenSquare className="mx-auto mb-6 h-12 w-12 text-amber-500" />
-              <h3 className="mb-4 text-2xl font-light text-gray-900">Your canvas is clear</h3>
-              <p className="mb-8 text-base text-gray-600">
+              <PenSquare className="mx-auto mb-6 h-12 w-12 text-[#c18a4e]" />
+              <h3 className="mb-4 text-2xl font-light text-slate-600">Your canvas is clear</h3>
+              <p className="mb-8 text-base text-slate-500">
                 Start your first story in the Studio to bring this space to life.
               </p>
               <a
                 href="http://localhost:3333"
                 target="_blank"
-                className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-6 py-3 text-sm font-medium text-white transition hover:bg-amber-600"
+                className="inline-flex items-center gap-2 rounded-full border border-[#e6d4bf] bg-[#f1e3d4] px-6 py-3 text-sm font-medium text-[#6f5d4d] transition hover:bg-[#ead7c0]"
                 rel="noreferrer"
               >
                 Open Studio

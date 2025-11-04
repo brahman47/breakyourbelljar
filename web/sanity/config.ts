@@ -1,6 +1,5 @@
 import { createClient, type QueryParams } from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
-import type { ImageUrlSource } from '@sanity/image-url/lib/types/types'
 
 export const projectId = '7sp6215z'
 export const dataset = 'production'
@@ -33,6 +32,8 @@ export async function sanityFetch<QueryResponse>({
 
 const builder = imageUrlBuilder(client)
 
-export function urlFor(source: ImageUrlSource) {
+type ImageSource = Parameters<typeof builder.image>[0]
+
+export function urlFor(source: ImageSource) {
   return builder.image(source)
 }
