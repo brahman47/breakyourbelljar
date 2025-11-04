@@ -51,7 +51,7 @@ export default async function ReflectionsPage() {
   const category: Category = await client.fetch(categoryQuery);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Navigation */}
       <Navigation />
 

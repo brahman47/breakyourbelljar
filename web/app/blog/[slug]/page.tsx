@@ -69,7 +69,7 @@ export default async function BlogPost({
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Navigation */}
       <Navigation />
 

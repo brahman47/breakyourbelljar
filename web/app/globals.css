@@ -13,8 +13,14 @@
   --font-serif: var(--font-cormorant), Georgia, serif;
 }
 
+html,
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)), url("/pattern.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
